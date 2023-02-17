@@ -33,11 +33,13 @@ app.use("/api/orders", allOrderRoutes);
 app.use("/api/profileedit", profileEditRoutes);
 
 const _dirname = path.resolve()
-app.use(express.static(path.join(_dirname, './client/build')))
+app.use(express.static(path.join(__dirname, "./client/build")));
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
-app.get("*", (req, res) => res.sendFile(path.join(_dirname, './client/build/index.html')))
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
